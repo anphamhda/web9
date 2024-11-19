@@ -1,4 +1,30 @@
 import streamlit as st
+import os
+
+def get_asset_path(filename):
+    """
+    Trả về đường dẫn tuyệt đối đến tệp trong thư mục 'assets',
+    bất kể nơi gọi hàm đang ở đâu.
+    
+    :param filename: Tên tệp cần truy cập trong thư mục 'assets'
+    :return: Đường dẫn tuyệt đối đến tệp trong thư mục 'assets'
+    """
+    # Lấy đường dẫn tuyệt đối đến thư mục chứa script hiện tại
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Xây dựng đường dẫn đến thư mục 'assets' và tệp cụ thể
+    asset_dir = os.path.join(script_dir, 'assets')
+    
+    # Tạo đường dẫn đầy đủ đến tệp
+    file_path = os.path.join(asset_dir, filename)
+    
+    # Kiểm tra xem tệp có tồn tại không
+    if not os.path.isfile(file_path):
+        raise FileNotFoundError(f"Tệp {filename} không tồn tại trong thư mục 'assets'.")
+    
+    return file_path
+
+
 st.set_page_config(page_title = "Trắc nghiệm tính cách", page_icon = ":question:",layout = "wide")
 
 
@@ -20,65 +46,65 @@ if b1:
    
     with col6:
         st.write("Âm thanh")
-        audio = open('assets/cat.mp3','rb')
+        audio = open(get_asset_path('cat.mp3'),'rb')
         st.audio(audio,format = 'audio/mp3')
 
         st.write("Video")
         video = 'https://www.youtube.com/watch?v=oFGz1kcRPfY'
         st.video(video,format = 'video/mp4')
     with col7:
-        image = 'assets/cat.jpg'
+        image = get_asset_path('cat.jpg')
         st.image(image,caption = "Con mèo")
         
 if b2:
     
     with col6:
         st.write("Âm thanh")
-        audio = open('assets/dog.mp3','rb')
+        audio = open(get_asset_path('dog.mp3'),'rb')
         st.audio(audio,format = 'audio/mp3')
 
         st.write("Video")
         video = 'https://www.youtube.com/watch?v=hPzfZvpoW4A'
         st.video(video,format = 'video/mp4')
     with col7:
-        image = 'assets/dog.jpg'
+        image = get_asset_path('dog.jpg')
         st.image(image,caption = "Con chó")
 if b3:
    
     with col6:
         st.write("Âm thanh")
-        audio = open('assets/monkey.mp3','rb')
+        audio = open(get_asset_path('monkey.mp3'),'rb')
         st.audio(audio,format = 'audio/mp3')
 
         st.write("Video")
         video = 'https://www.youtube.com/watch?v=8d3z4QpUnrQ'
         st.video(video,format = 'video/mp4')
     with col7:
-        image = 'assets/monkey.jpg'
+        image = get_asset_path('monkey.jpg')
         st.image(image,caption = "Con khỉ")
 if b4:
     with col6:
         st.write("Âm thanh")
-        audio = open('assets/eagle.mp3','rb')
+        audio = open(get_asset_path('eagle.mp3'),'rb')
         st.audio(audio,format = 'audio/mp3')
 
         st.write("Video")
         video = 'https://www.youtube.com/watch?v=T7pk7f649qU'
         st.video(video,format = 'video/mp4')
     with col7:
-        image = 'assets/eagle.jpg'
+        image = get_asset_path('eagle.jpg')
         st.image(image,caption = "Đại bàng")
 if b5:
     with col6:
         st.write("Âm thanh")
-        audio = open('assets/chicken.mp3','rb')
+        audio = open(get_asset_path('chicken.mp3'),'rb')
         st.audio(audio,format = 'audio/mp3')
 
         st.write("Video")
         video = 'https://www.youtube.com/watch?v=a0ZBh_ggwJk'
         st.video(video,format = 'video/mp4')
     with col7:
-        image = 'assets/chicken.jpg'
+        image = get_asset_path('chicken.jpg')
         st.image(image,caption = "Con gà")
 with st.sidebar:
     st.title("Trắc nghiệm tính cách:")
